@@ -1,18 +1,8 @@
 {
-  "$schema": "https://anthropic.com/claude-code/plugin.schema.json",
   "name": "hook-architect",
-  "displayName": "Hook Architect",
-  "version": "1.0.0",
   "description": "Design perfect Claude Code hooks for any codebase. Guided discovery, intelligent recommendations, self-healing, and automatic updates.",
+  "version": "2.0.0",
   "author": {
-    "name": "FoxFlow",
-    "email": "plugins@foxflow.dev"
-  },
-  "repository": "https://github.com/Lego4005/foxit-marketplace",
-  "license": "MIT",
-  "category": "development",
-  "tags": ["hooks", "automation", "self-healing", "best-practices"],
-  "skills": ["hook-architect"],
-  "templates": ["templates/hooks"],
-  "scripts": ["scripts/install-hooks.sh"]
+    "name": "FoxFlow"
+  }
 }

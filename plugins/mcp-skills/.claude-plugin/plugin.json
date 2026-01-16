@@ -1,18 +1,8 @@
 {
-  "$schema": "https://anthropic.com/claude-code/plugin.schema.json",
   "name": "mcp-skills",
-  "displayName": "MCP Skills Manager",
+  "description": "Turn MCP servers into documented, searchable skills. Includes starter pack with context7, sequential-thinking, memory, and fetch.",
   "version": "1.0.0",
-  "description": "Turn your MCP servers into documented, searchable skills. Import from global settings, auto-generate docs, keep index synced.",
   "author": {
-    "name": "FoxFlow",
-    "email": "plugins@foxflow.dev"
-  },
-  "repository": "https://github.com/Lego4005/foxit-marketplace",
-  "license": "MIT",
-  "category": "development",
-  "tags": ["mcp", "skills", "documentation", "automation"],
-  "skills": ["mcp-skills"],
-  "templates": ["templates"],
-  "scripts": ["scripts/install-starter-mcps.sh", "scripts/import-mcps.sh", "scripts/sync-index.sh", "scripts/init-skills.sh"]
+    "name": "FoxFlow"
+  }
 }

@@ -1,18 +1,8 @@
 {
-  "$schema": "https://anthropic.com/claude-code/plugin.schema.json",
   "name": "statusline-pro",
-  "displayName": "Statusline Pro",
+  "description": "Beautiful, informative statusline for Claude Code. Shows git branch, clean/dirty status, session time, and more.",
   "version": "1.0.0",
-  "description": "Beautiful, informative statusline for Claude Code. Shows git info, session time, and more.",
   "author": {
-    "name": "FoxFlow",
-    "email": "plugins@foxflow.dev"
-  },
-  "repository": "https://github.com/Lego4005/foxit-marketplace",
-  "license": "MIT",
-  "category": "productivity",
-  "tags": ["statusline", "git", "productivity", "ui"],
-  "skills": ["statusline-pro"],
-  "templates": ["templates"],
-  "scripts": ["scripts/install-statusline.sh"]
+    "name": "FoxFlow"
+  }
 }
