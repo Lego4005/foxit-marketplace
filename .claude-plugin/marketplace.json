@@ -18,6 +18,18 @@
       "source": "./plugins/hook-architect",
       "category": "development",
       "homepage": "https://github.com/Lego4005/foxit-marketplace/tree/main/plugins/hook-architect"
+    },
+    {
+      "name": "statusline-pro",
+      "description": "Beautiful, informative statusline for Claude Code. Shows git branch, clean/dirty status, session time, and more.",
+      "version": "1.0.0",
+      "author": {
+        "name": "FoxFlow",
+        "email": "plugins@foxflow.dev"
+      },
+      "source": "./plugins/statusline-pro",
+      "category": "productivity",
+      "homepage": "https://github.com/Lego4005/foxit-marketplace/tree/main/plugins/statusline-pro"
     }
   ]
 }
