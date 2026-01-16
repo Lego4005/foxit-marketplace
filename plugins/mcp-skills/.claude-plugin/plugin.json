@@ -14,5 +14,5 @@
   "tags": ["mcp", "skills", "documentation", "automation"],
   "skills": ["mcp-skills"],
   "templates": ["templates"],
-  "scripts": ["scripts/import-mcps.sh", "scripts/sync-index.sh", "scripts/init-skills.sh"]
+  "scripts": ["scripts/install-starter-mcps.sh", "scripts/import-mcps.sh", "scripts/sync-index.sh", "scripts/init-skills.sh"]
 }

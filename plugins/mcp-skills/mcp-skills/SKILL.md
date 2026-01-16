@@ -23,15 +23,34 @@ MCP servers are powerful but:
 ## Quick Start
 
 ```bash
-# 1. Initialize skills directory
+# 1. Install recommended MCPs (context7, sequential-thinking, memory, fetch)
+./scripts/install-starter-mcps.sh
+
+# 2. Restart Claude Code to activate MCPs
+
+# 3. Initialize skills directory with pre-written docs
 ./scripts/init-skills.sh
 
-# 2. Import from your global Claude settings
+# 4. Import any additional MCPs from your settings
 ./scripts/import-mcps.sh
-
-# 3. Sync the index
-./scripts/sync-index.sh
 ```
+
+## 🚀 Starter Pack
+
+New to MCPs? The starter pack installs 4 essential MCPs:
+
+| MCP | What It Does |
+|-----|--------------|
+| **context7** | Fetch up-to-date library docs (avoids hallucinated APIs) |
+| **sequential-thinking** | Step-by-step reasoning with revision & branching |
+| **memory** | Persistent memory across sessions (local knowledge graph) |
+| **fetch** | Read web pages and convert to markdown |
+
+```bash
+./scripts/install-starter-mcps.sh
+```
+
+Pre-written documentation included in `templates/` folder!
 
 ## Commands
 
