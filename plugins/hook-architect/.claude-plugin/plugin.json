@@ -8,29 +8,11 @@
     "name": "FoxFlow",
     "email": "plugins@foxflow.dev"
   },
-  "repository": "https://github.com/foxflow/foxit-marketplace",
+  "repository": "https://github.com/Lego4005/foxit-marketplace",
   "license": "MIT",
   "category": "development",
   "tags": ["hooks", "automation", "self-healing", "best-practices"],
-  "commands": [
-    "hook-architect",
-    "hook-architect:review",
-    "hook-architect:update",
-    "hook-architect:heal",
-    "hook-architect:recipes"
-  ],
-  "agents": [
-    "hook-reviewer"
-  ],
-  "skills": [
-    "hook-architect.md",
-    "hook-recipes.md"
-  ],
-  "hooks": [
-    {
-      "event": "SessionStart",
-      "command": "hooks/health-check.sh",
-      "description": "Check hook health on session start (optional)"
-    }
-  ]
+  "skills": ["hook-architect"],
+  "templates": ["templates/hooks"],
+  "scripts": ["scripts/install-hooks.sh"]
 }
