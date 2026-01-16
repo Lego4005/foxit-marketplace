@@ -30,6 +30,18 @@
       "source": "./plugins/statusline-pro",
       "category": "productivity",
       "homepage": "https://github.com/Lego4005/foxit-marketplace/tree/main/plugins/statusline-pro"
+    },
+    {
+      "name": "mcp-skills",
+      "description": "Turn MCP servers into documented, searchable skills. Import from global settings, auto-discover tools, keep everything organized.",
+      "version": "1.0.0",
+      "author": {
+        "name": "FoxFlow",
+        "email": "plugins@foxflow.dev"
+      },
+      "source": "./plugins/mcp-skills",
+      "category": "development",
+      "homepage": "https://github.com/Lego4005/foxit-marketplace/tree/main/plugins/mcp-skills"
     }
   ]
 }
