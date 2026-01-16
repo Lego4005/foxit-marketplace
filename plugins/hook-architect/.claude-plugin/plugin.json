@@ -1,0 +1,36 @@
+{
+  "$schema": "https://anthropic.com/claude-code/plugin.schema.json",
+  "name": "hook-architect",
+  "displayName": "Hook Architect",
+  "version": "1.0.0",
+  "description": "Design perfect Claude Code hooks for any codebase. Guided discovery, intelligent recommendations, self-healing, and automatic updates.",
+  "author": {
+    "name": "FoxFlow",
+    "email": "plugins@foxflow.dev"
+  },
+  "repository": "https://github.com/foxflow/foxit-marketplace",
+  "license": "MIT",
+  "category": "development",
+  "tags": ["hooks", "automation", "self-healing", "best-practices"],
+  "commands": [
+    "hook-architect",
+    "hook-architect:review",
+    "hook-architect:update",
+    "hook-architect:heal",
+    "hook-architect:recipes"
+  ],
+  "agents": [
+    "hook-reviewer"
+  ],
+  "skills": [
+    "hook-architect.md",
+    "hook-recipes.md"
+  ],
+  "hooks": [
+    {
+      "event": "SessionStart",
+      "command": "hooks/health-check.sh",
+      "description": "Check hook health on session start (optional)"
+    }
+  ]
+}

@@ -1,0 +1,83 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "foxit-marketplace",
+  "description": "FoxIt Marketplace - Curated Claude Code plugins for power users. Hooks, agents, skills, and orchestration tools built by the FoxFlow team.",
+  "owner": {
+    "name": "FoxFlow",
+    "email": "plugins@foxflow.dev"
+  },
+  "plugins": [
+    {
+      "name": "hook-architect",
+      "description": "Design perfect Claude Code hooks for any codebase. Guided discovery, intelligent recommendations, self-healing, and automatic updates from Anthropic docs.",
+      "version": "1.0.0",
+      "author": {
+        "name": "FoxFlow",
+        "email": "plugins@foxflow.dev"
+      },
+      "source": "./plugins/hook-architect",
+      "category": "development",
+      "homepage": "https://github.com/foxflow/foxit-marketplace/tree/main/plugins/hook-architect"
+    },
+    {
+      "name": "foxit-orchestrator",
+      "description": "Multi-agent orchestration with FDAG learning, automatic swarm selection, and intelligent task decomposition.",
+      "version": "1.0.0",
+      "author": {
+        "name": "FoxFlow",
+        "email": "plugins@foxflow.dev"
+      },
+      "source": "./plugins/foxit-orchestrator",
+      "category": "development",
+      "homepage": "https://github.com/foxflow/foxit-marketplace/tree/main/plugins/foxit-orchestrator"
+    },
+    {
+      "name": "truth-manifesto",
+      "description": "Anti-hallucination evaluation framework. 15-step validation with falsification gates, 7-dimensional scoring, and self-attack patterns.",
+      "version": "1.0.0",
+      "author": {
+        "name": "FoxFlow",
+        "email": "plugins@foxflow.dev"
+      },
+      "source": "./plugins/truth-manifesto",
+      "category": "testing",
+      "homepage": "https://github.com/foxflow/foxit-marketplace/tree/main/plugins/truth-manifesto"
+    },
+    {
+      "name": "ultrathink",
+      "description": "Deep sequential thinking with revision and branching for complex problem-solving. Local CLI, no MCP dependencies.",
+      "version": "1.0.0",
+      "author": {
+        "name": "FoxFlow",
+        "email": "plugins@foxflow.dev"
+      },
+      "source": "./plugins/ultrathink",
+      "category": "productivity",
+      "homepage": "https://github.com/foxflow/foxit-marketplace/tree/main/plugins/ultrathink"
+    },
+    {
+      "name": "goalie",
+      "description": "GOAP-powered research with Perplexity integration. Anti-hallucination, citations, multi-agent goal planning.",
+      "version": "1.0.0",
+      "author": {
+        "name": "FoxFlow",
+        "email": "plugins@foxflow.dev"
+      },
+      "source": "./plugins/goalie",
+      "category": "productivity",
+      "homepage": "https://github.com/foxflow/foxit-marketplace/tree/main/plugins/goalie"
+    },
+    {
+      "name": "foxscan",
+      "description": "Project health scanner - find gaps, rate importance, identify low-value work, and surface technical debt.",
+      "version": "1.0.0",
+      "author": {
+        "name": "FoxFlow",
+        "email": "plugins@foxflow.dev"
+      },
+      "source": "./plugins/foxscan",
+      "category": "monitoring",
+      "homepage": "https://github.com/foxflow/foxit-marketplace/tree/main/plugins/foxscan"
+    }
+  ]
+}
