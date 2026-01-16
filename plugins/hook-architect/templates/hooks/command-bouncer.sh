@@ -1,7 +1,10 @@
 #!/bin/bash
 # command-bouncer.sh - Block dangerous shell commands
 # Hook Type: PreToolUse (Bash)
-# Version: 1.0.0
+# Version: 2.0.0 - Updated to new Anthropic hooks API (January 2026)
+#
+# API Change: Uses hookSpecificOutput.permissionDecision instead of deprecated decision field
+# Values: "allow" | "deny" | "ask" (was: "approve" | "block")
 
 set -e
 
@@ -11,7 +14,7 @@ COMMAND=$(echo "$INPUT" | jq -r '.tool_input.command // empty')
 
 # Only check Bash commands
 if [[ "$TOOL_NAME" != "Bash" ]]; then
-  echo '{"decision": "proceed"}'
+  echo '{"hookSpecificOutput": {"hookEventName": "PreToolUse", "permissionDecision": "allow"}}'
   exit 0
 fi
 
@@ -40,9 +43,9 @@ DANGEROUS_PATTERNS=(
 
 for pattern in "${DANGEROUS_PATTERNS[@]}"; do
   if [[ "$COMMAND" =~ $pattern ]]; then
-    echo "{\"decision\": \"block\", \"reason\": \"🚫 Dangerous command blocked: matches pattern '$pattern'\"}"
+    echo "{\"hookSpecificOutput\": {\"hookEventName\": \"PreToolUse\", \"permissionDecision\": \"deny\", \"permissionDecisionReason\": \"🚫 Dangerous command blocked: matches pattern '$pattern'\"}}"
     exit 0
   fi
 done
 
-echo '{"decision": "proceed"}'
+echo '{"hookSpecificOutput": {"hookEventName": "PreToolUse", "permissionDecision": "allow"}}'

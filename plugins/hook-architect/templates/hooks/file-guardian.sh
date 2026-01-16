@@ -1,7 +1,10 @@
 #!/bin/bash
 # file-guardian.sh - Protect critical files from accidental edits
 # Hook Type: PreToolUse (Edit, Write)
-# Version: 1.0.0
+# Version: 2.0.0 - Updated to new Anthropic hooks API (January 2026)
+#
+# API Change: Uses hookSpecificOutput.permissionDecision instead of deprecated decision field
+# Values: "allow" | "deny" | "ask" (was: "approve" | "block")
 
 set -e
 
@@ -12,7 +15,7 @@ FILE_PATH=$(echo "$INPUT" | jq -r '.tool_input.file_path // empty')
 
 # Early exit for non-edit tools
 if [[ "$TOOL_NAME" != "Edit" && "$TOOL_NAME" != "Write" ]]; then
-  echo '{"decision": "proceed"}'
+  echo '{"hookSpecificOutput": {"hookEventName": "PreToolUse", "permissionDecision": "allow"}}'
   exit 0
 fi
 
@@ -35,9 +38,10 @@ PROTECTED_PATTERNS=(
 # Check if file matches any protected pattern
 for pattern in "${PROTECTED_PATTERNS[@]}"; do
   if [[ "$FILE_PATH" =~ $pattern ]]; then
-    echo "{\"decision\": \"block\", \"reason\": \"🛡️ Protected file: $FILE_PATH (matches pattern: $pattern)\"}"
+    # Use "ask" to let user override, or "deny" to hard block
+    echo "{\"hookSpecificOutput\": {\"hookEventName\": \"PreToolUse\", \"permissionDecision\": \"deny\", \"permissionDecisionReason\": \"🛡️ Protected file: $FILE_PATH (matches pattern: $pattern)\"}}"
     exit 0
   fi
 done
 
-echo '{"decision": "proceed"}'
+echo '{"hookSpecificOutput": {"hookEventName": "PreToolUse", "permissionDecision": "allow"}}'
