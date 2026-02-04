@@ -1,35 +1,186 @@
 ---
-description: Beautiful, informative statusline for Claude Code - git info, session time, and more
+description: Beautiful, informative statusline for Claude Code - git info, session time, system stats & more
 triggers: [statusline-pro, statusline, status]
 ---
 
-# Statusline Pro
+# ✨ Statusline Pro
 
-A beautiful, customizable statusline for Claude Code that shows git info, session duration, and more.
-
-## What You Get
+> Level up your Claude Code experience with a stunning, informative statusline.
 
 ```
- main ✓ │ ▸ ~/my-project │ ◷ 14:30 │ ⏱ 23m
+╭──────────────────────────────────────────────────────────────────────────────╮
+│  main ✓ │ ▸ ~/my-project │ 󰍛 2.1G │ ◷ 14:30 │ ⏱ 23m │  98%           │
+╰──────────────────────────────────────────────────────────────────────────────╯
 ```
 
-| Segment | Shows |
-|---------|-------|
-|  main | Current git branch |
-| ✓ or ● | Clean or dirty working tree |
-| ↑2 ↓1 | Commits ahead/behind remote |
-| ▸ ~/path | Current directory (shortened) |
-| ◷ 14:30 | Current time |
-| ⏱ 23m | Session duration |
-
-## Quick Install
+## 🚀 One-Line Install
 
 ```bash
-# From plugin directory
-./scripts/install-statusline.sh
+curl -fsSL https://raw.githubusercontent.com/anthropics/claude-code/main/statusline-pro/install.sh | bash
 ```
 
-Then add to `.claude/settings.json`:
+**Or clone and run:**
+
+```bash
+git clone https://github.com/anthropics/claude-code-plugins.git
+cd claude-code-plugins/statusline-pro && ./scripts/install-statusline.sh
+```
+
+## 🎨 Themes
+
+Pick your style with `--theme`:
+
+### 🔥 Powerline (requires Nerd Fonts)
+
+```
+  main  ✓    ~/project    14:30   23m    2.1G
+```
+
+### ⚡ Cyberpunk
+
+```
+┃ ⟨main⟩ ✓ ┃ ⌁ ~/project ┃ ⌚ 14:30 ┃ ⚡ 23m ┃
+```
+
+### 🌙 Minimal
+
+```
+main ✓ · ~/project · 14:30
+```
+
+### 🤖 Hacker
+
+```
+[git:main|✓] [dir:~/project] [mem:2.1G] [⏱23m]
+```
+
+### 🎮 Retro
+
+```
+░▒▓ main ▓▒░ ~/project ░▒▓ 14:30 ▓▒░
+```
+
+### 🌈 Nyan
+
+```
+█▀▀ main ▀▀█ ═══ ~/project ═══ ★ 14:30 ★
+```
+
+## 📊 Available Segments
+
+| Segment     | Icon | Description                    |
+| ----------- | ---- | ------------------------------ |
+| **git**     |      | Branch, status, ahead/behind   |
+| **dir**     | ▸    | Smart-shortened directory path |
+| **time**    | ◷    | Current time (12h or 24h)      |
+| **session** | ⏱    | How long you've been coding    |
+| **memory**  | 󰍛    | System memory usage            |
+| **cpu**     |      | CPU load percentage            |
+| **battery** |      | Battery level (laptops)        |
+| **weather** |      | Current temp (needs API key)   |
+| **spotify** |      | Now playing track              |
+
+## ⚙️ Configuration
+
+After install, edit `~/.config/claude-statusline/config.sh`:
+
+```bash
+# ═══════════════════════════════════════════
+#  STATUSLINE PRO CONFIG
+# ═══════════════════════════════════════════
+
+# Theme: powerline, cyberpunk, minimal, hacker, retro, nyan
+THEME="powerline"
+
+# Segments to show (order matters!)
+SEGMENTS=(git dir memory time session)
+
+# Time format: 12h or 24h
+TIME_FORMAT="24h"
+
+# Directory shortening
+MAX_DIR_LENGTH=25
+SHOW_FULL_HOME=false    # ~/Code vs /Users/you/Code
+
+# Colors: dracula, nord, gruvbox, monokai, solarized, catppuccin
+COLOR_SCHEME="dracula"
+
+# Separators (for powerline theme)
+SEP_LEFT=""
+SEP_RIGHT=""
+
+# Refresh rate in seconds (for dynamic segments)
+REFRESH_RATE=30
+
+# ═══════════════════════════════════════════
+#  OPTIONAL INTEGRATIONS
+# ═══════════════════════════════════════════
+
+# OpenWeather API (free tier works)
+WEATHER_API_KEY=""
+WEATHER_CITY="San Francisco"
+WEATHER_UNITS="imperial"  # imperial or metric
+
+# Show warnings when...
+WARN_MEMORY_ABOVE=80      # Memory usage %
+WARN_SESSION_AFTER=120    # Minutes
+```
+
+## 🎯 Quick Examples
+
+**Developer Focus (git + session only):**
+
+```bash
+SEGMENTS=(git session)
+#  main ✓ │ ⏱ 1h23m
+```
+
+**System Monitor:**
+
+```bash
+SEGMENTS=(cpu memory battery)
+#  12% │ 󰍛 8.2G/16G │  87%
+```
+
+**Full Dashboard:**
+
+```bash
+SEGMENTS=(git dir memory cpu time session)
+#  main ✓ │ ▸ ~/project │ 󰍛 2.1G │  5% │ ◷ 14:30 │ ⏱ 23m
+```
+
+## 🛠 Commands
+
+```bash
+# Preview a theme without installing
+statusline-pro preview cyberpunk
+
+# Switch theme
+statusline-pro theme powerline
+
+# Toggle a segment
+statusline-pro toggle memory
+
+# Show current config
+statusline-pro config
+
+# Update to latest
+statusline-pro update
+```
+
+## 🔧 Manual Setup
+
+If you prefer manual installation:
+
+1. **Copy hooks to your project:**
+
+```bash
+cp templates/statusline.sh ~/.config/claude-statusline/
+cp templates/session-start.sh ~/.config/claude-statusline/
+chmod +x ~/.config/claude-statusline/*.sh
+```
+
+2. **Add to `~/.claude/settings.json`:**
 
 ```json
 {
@@ -37,14 +188,20 @@ Then add to `.claude/settings.json`:
     "SessionStart": [
       {
         "hooks": [
-          {"type": "command", "command": ".claude/hooks/session-start.sh"}
+          {
+            "type": "command",
+            "command": "~/.config/claude-statusline/session-start.sh"
+          }
         ]
       }
     ],
     "Notification": [
       {
         "hooks": [
-          {"type": "command", "command": ".claude/hooks/statusline.sh"}
+          {
+            "type": "command",
+            "command": "~/.config/claude-statusline/statusline.sh"
+          }
         ]
       }
     ]
@@ -52,91 +209,77 @@ Then add to `.claude/settings.json`:
 }
 ```
 
-## Customization
+## 🎨 Color Schemes
 
-Edit `.claude/hooks/statusline.sh` to customize:
+| Scheme          | Preview                      |
+| --------------- | ---------------------------- |
+| **Dracula**     | 🟣 Purple/pink/cyan on dark  |
+| **Nord**        | 🔵 Cool blues and teals      |
+| **Gruvbox**     | 🟤 Warm retro browns/oranges |
+| **Monokai**     | 🟢 Vibrant greens/pinks      |
+| **Solarized**   | 🟡 Classic tan/blue          |
+| **Catppuccin**  | 🌸 Soft pastels              |
+| **Tokyo Night** | 🌃 Purple/blue neon          |
 
-```bash
-# Show/hide segments
-SHOW_GIT=true
-SHOW_TIME=true
-SHOW_DIR=true
-SHOW_SESSION=true
+## ❓ Troubleshooting
 
-# Directory length
-MAX_DIR_LENGTH=30
+### Icons look weird?
 
-# Change icons
-ICON_BRANCH=""      # Git branch icon
-ICON_CLEAN="✓"       # Clean repo
-ICON_DIRTY="●"       # Uncommitted changes
-ICON_AHEAD="↑"       # Commits ahead
-ICON_BEHIND="↓"      # Commits behind
-ICON_CLOCK="◷"       # Time icon
-ICON_FOLDER="▸"      # Directory icon
-```
-
-## Themes
-
-### Minimal
-```bash
-SHOW_GIT=true
-SHOW_TIME=false
-SHOW_DIR=true
-SHOW_SESSION=false
-```
-Result: ` main ✓ │ ▸ ~/project`
-
-### Full Info
-```bash
-SHOW_GIT=true
-SHOW_TIME=true
-SHOW_DIR=true
-SHOW_SESSION=true
-```
-Result: ` main ✓ ↑2 │ ▸ ~/project │ ◷ 14:30 │ ⏱ 1h23m`
-
-### Git Only
-```bash
-SHOW_GIT=true
-SHOW_TIME=false
-SHOW_DIR=false
-SHOW_SESSION=false
-```
-Result: ` main ● ↑2 ↓1`
-
-## How It Works
-
-1. **SessionStart hook** - Records when your session begins
-2. **Notification hook** - Updates the statusline periodically
-3. **Git integration** - Reads from local git repo (no external calls)
-4. **Zero dependencies** - Pure bash, works everywhere
-
-## Troubleshooting
-
-### Icons not showing?
-Your terminal might not support Unicode. Use ASCII alternatives:
+Install a [Nerd Font](https://www.nerdfonts.com/) or switch to ASCII theme:
 
 ```bash
-ICON_BRANCH="git:"
-ICON_CLEAN="ok"
-ICON_DIRTY="*"
-ICON_AHEAD="+"
-ICON_BEHIND="-"
-ICON_CLOCK="@"
-ICON_FOLDER=">"
+statusline-pro theme hacker  # Uses ASCII-only icons
 ```
-
-### Session time always shows 0m?
-Make sure the SessionStart hook is configured and runs when Claude Code starts.
 
 ### Not seeing the statusline?
-1. Check hooks are in `.claude/hooks/` and executable
-2. Verify `.claude/settings.json` has the hook configuration
-3. Run `claude --debug` to see hook execution
 
-## Requirements
+```bash
+# Test the hook directly
+~/.config/claude-statusline/statusline.sh
 
-- Claude Code 2.1.x+
-- Bash 4.0+
-- Git (for git info segments)
+# Check Claude sees it
+claude --debug
+```
+
+### Session time stuck at 0m?
+
+```bash
+# Manually trigger session start
+~/.config/claude-statusline/session-start.sh
+```
+
+### CPU/Memory not showing?
+
+These use system commands (`top`, `free`, `vm_stat`). Make sure they're available:
+
+```bash
+# macOS
+which vm_stat
+
+# Linux
+which free
+```
+
+## 📋 Requirements
+
+- **Claude Code** 2.1.x or later
+- **Bash** 4.0+ (ships with macOS/Linux)
+- **Git** (for git segments)
+- **Nerd Font** (optional, for fancy icons)
+
+## 🤝 Contributing
+
+Got a cool theme? Submit a PR!
+
+```bash
+# Create your theme
+cp themes/minimal.sh themes/mytheme.sh
+# Edit and test
+statusline-pro preview mytheme
+```
+
+---
+
+<p align="center">
+  <i>Made with ☕ for the Claude Code community</i>
+</p>

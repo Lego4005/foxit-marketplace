@@ -1,8 +1,9 @@
 {
   "name": "statusline-pro",
-  "description": "Beautiful, informative statusline for Claude Code. Shows git branch, clean/dirty status, session time, and more.",
-  "version": "1.0.0",
+  "description": "Beautiful, customizable statusline for Claude Code. Multiple themes, color schemes, git info, system stats & more.",
+  "version": "2.0.0",
   "author": {
     "name": "FoxFlow"
-  }
+  },
+  "keywords": ["statusline", "git", "themes", "powerline", "claude-code"]
 }
