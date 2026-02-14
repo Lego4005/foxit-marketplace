@@ -1,0 +1,31 @@
+{
+  "name": "whats-new",
+  "description": "Automatic Claude Code version change detection with personalized release notes impact analysis. Notifies you when updates happen, categorizes changes by impact, and recommends actions.",
+  "version": "1.0.0",
+  "author": {
+    "name": "FoxFlow",
+    "email": "plugins@foxflow.dev"
+  },
+  "license": "MIT",
+  "claude-code": {
+    "minVersion": "2.0.0"
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${CLAUDE_PLUGIN_ROOT}/hooks/version-watch.sh",
+            "timeout": 2000,
+            "statusMessage": "Checking for Claude Code updates..."
+          }
+        ]
+      }
+    ]
+  },
+  "skills": [
+    "skills/whats-new/SKILL.md"
+  ]
+}

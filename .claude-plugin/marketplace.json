@@ -42,6 +42,18 @@
       "source": "./plugins/mcp-skills",
       "category": "development",
       "homepage": "https://github.com/Lego4005/foxit-marketplace/tree/main/plugins/mcp-skills"
+    },
+    {
+      "name": "whats-new",
+      "description": "Automatic Claude Code version change detection with personalized release notes impact analysis. Notifies on updates, categorizes changes by impact, and recommends actions.",
+      "version": "1.0.0",
+      "author": {
+        "name": "FoxFlow",
+        "email": "plugins@foxflow.dev"
+      },
+      "source": "./plugins/whats-new",
+      "category": "productivity",
+      "homepage": "https://github.com/Lego4005/foxit-marketplace/tree/main/plugins/whats-new"
     }
   ]
 }
