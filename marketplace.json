@@ -1,0 +1,52 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "foxit-marketplace",
+  "version": "1.0.0",
+  "description": "Curated Claude Code plugins for power users",
+  "owner": {
+    "name": "FoxFlow",
+    "email": "plugins@foxflow.dev"
+  },
+  "plugins": [
+    {
+      "name": "hook-architect",
+      "description": "Design perfect Claude Code hooks with guided discovery, self-healing, and auto-updates",
+      "version": "2.0.0",
+      "author": { "name": "FoxFlow" },
+      "source": "./plugins/hook-architect",
+      "category": "development"
+    },
+    {
+      "name": "cf-doctor",
+      "description": "Diagnose and fix claude-flow + ruvector integration — 83 known bugs, auto-patching, learning persistence",
+      "version": "1.0.0",
+      "author": { "name": "FoxFlow" },
+      "source": "./plugins/cf-doctor",
+      "category": "development"
+    },
+    {
+      "name": "whats-new",
+      "description": "Automatic Claude Code version change detection with personalized release notes impact analysis",
+      "version": "1.0.0",
+      "author": { "name": "FoxFlow" },
+      "source": "./plugins/whats-new",
+      "category": "monitoring"
+    },
+    {
+      "name": "statusline-pro",
+      "description": "Beautiful, customizable statusline for Claude Code with multiple themes, git info, and system stats",
+      "version": "2.0.0",
+      "author": { "name": "FoxFlow" },
+      "source": "./plugins/statusline-pro",
+      "category": "productivity"
+    },
+    {
+      "name": "mcp-skills",
+      "description": "Turn MCP servers into documented, searchable skills with starter pack",
+      "version": "1.0.0",
+      "author": { "name": "FoxFlow" },
+      "source": "./plugins/mcp-skills",
+      "category": "development"
+    }
+  ]
+}
