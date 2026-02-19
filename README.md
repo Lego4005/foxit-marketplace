@@ -20,9 +20,6 @@ Curated Claude Code plugins for power users. Hooks, agents, skills, and orchestr
 | Plugin | Category | Description |
 |--------|----------|-------------|
 | **[hook-architect](plugins/hook-architect)** | Development | Design perfect hooks with guided discovery, self-healing, and auto-updates |
-| **foxit-orchestrator** | Development | Multi-agent orchestration with FDAG learning and automatic swarm selection |
-| **truth-manifesto** | Testing | Anti-hallucination framework with 15-step validation and falsification gates |
-| **ultrathink** | Productivity | Deep sequential thinking with revision and branching |
 | **goalie** | Productivity | GOAP-powered research with Perplexity, citations, and multi-agent planning |
 | **foxscan** | Monitoring | Project health scanner - find gaps, rate importance, surface tech debt |
 | **[cf-doctor](plugins/cf-doctor)** | Development | Diagnose and fix claude-flow + ruvector integration — 83 known bugs, auto-patching, learning persistence |
