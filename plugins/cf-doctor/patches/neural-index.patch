@@ -1,0 +1,8 @@
+--- a/v3/@claude-flow/neural/index.ts
++++ b/v3/@claude-flow/neural/index.ts
+@@ -1,3 +1,4 @@
+ export { SonaIntegration } from './src/sona-integration';
+ export { NeuralRouter } from './src/neural-router';
+-// ... other exports that depend on @ruvector
++// Re-exports are safe now because sona-integration uses dynamic import internally
++// No @ruvector/* static imports leak through this barrel file

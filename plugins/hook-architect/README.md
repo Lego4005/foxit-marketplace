@@ -10,7 +10,7 @@ Design perfect Claude Code hooks for any codebase through guided discovery, inte
 
 Or add to your marketplace sources:
 ```bash
-/plugin marketplace add https://github.com/foxflow/foxit-marketplace
+/plugin marketplace add https://github.com/Lego4005/foxit-marketplace
 /plugin install hook-architect
 ```
 
@@ -142,4 +142,4 @@ MIT
 
 ---
 
-Part of the [FoxIt Marketplace](https://github.com/foxflow/foxit-marketplace) - Curated Claude Code plugins for power users.
+Part of the [FoxIt Marketplace](https://github.com/Lego4005/foxit-marketplace) - Curated Claude Code plugins for power users.

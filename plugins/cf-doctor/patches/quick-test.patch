@@ -1,0 +1,25 @@
+--- a/v3/@claude-flow/performance/src/examples/quick-test.ts
++++ b/v3/@claude-flow/performance/src/examples/quick-test.ts
+@@ -1,7 +1,19 @@
+-import { FlashAttention } from '@ruvector/attention';
+-
+ async function runBenchmark() {
+-  const attn = new FlashAttention({ headDim: 64 });
++  let FlashAttention: any;
++  try {
++    const mod = await import('@ruvector/attention');
++    FlashAttention = mod.FlashAttention;
++  } catch {
++    console.warn('[perf] @ruvector/attention not available, using mock');
++    FlashAttention = class MockFlashAttention {
++      constructor(private opts: any) {}
++      async forward(q: any, k: any, v: any) {
++        // Mock: return zero tensor of expected shape
++        return { output: new Float32Array(this.opts.headDim || 64), mockResult: true };
++      }
++    };
++  }
++
++  const attn = new FlashAttention({ headDim: 64 });
+   // ...rest of benchmark
+ }

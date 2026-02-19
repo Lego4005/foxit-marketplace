@@ -1,0 +1,30 @@
+--- a/npm/packages/agentic-integration/swarm-manager.ts
++++ b/npm/packages/agentic-integration/swarm-manager.ts
+@@ -1,4 +1,25 @@
++async function detectClaudeFlowVersion(): Promise<'v2' | 'v3' | null> {
++  try {
++    const { stdout } = await execAsync('npx claude-flow --version 2>/dev/null');
++    const version = stdout.trim();
++    if (version.startsWith('3.') || version.startsWith('v3.')) return 'v3';
++    if (version.startsWith('2.') || version.startsWith('v2.') || version.includes('alpha')) return 'v2';
++    return 'v3'; // default to v3 for newer versions
++  } catch {
++    return null;
++  }
++}
++
+ async function registerHooks(config: SwarmConfig) {
+-  const proc = spawn('npx', ['claude-flow@alpha', 'hooks', 'register', '--swarm', config.name]);
++  const cfVersion = await detectClaudeFlowVersion();
++  if (!cfVersion) {
++    console.warn('[swarm-manager] claude-flow not found, skipping hook registration');
++    return;
++  }
++
++  const args = cfVersion === 'v3'
++    ? ['claude-flow', 'mcp', '--hooks', JSON.stringify({ swarm: config.name })]
++    : ['claude-flow@alpha', 'hooks', 'register', '--swarm', config.name];
++
++  const proc = spawn('npx', args);
+   // ...
+ }

@@ -6,7 +6,7 @@ Curated Claude Code plugins for power users. Hooks, agents, skills, and orchestr
 
 ```bash
 # Add FoxIt Marketplace as a plugin source
-/plugin marketplace add https://github.com/foxflow/foxit-marketplace
+/plugin marketplace add https://github.com/Lego4005/foxit-marketplace
 
 # Browse available plugins
 /plugin search foxit
@@ -25,6 +25,7 @@ Curated Claude Code plugins for power users. Hooks, agents, skills, and orchestr
 | **ultrathink** | Productivity | Deep sequential thinking with revision and branching |
 | **goalie** | Productivity | GOAP-powered research with Perplexity, citations, and multi-agent planning |
 | **foxscan** | Monitoring | Project health scanner - find gaps, rate importance, surface tech debt |
+| **[cf-doctor](plugins/cf-doctor)** | Development | Diagnose and fix claude-flow + ruvector integration — 83 known bugs, auto-patching, learning persistence |
 
 ## Plugin Structure
 
@@ -45,18 +46,18 @@ plugin-name/
 
 ### From FoxIt Marketplace
 ```bash
-/plugin marketplace add https://github.com/foxflow/foxit-marketplace
+/plugin marketplace add https://github.com/Lego4005/foxit-marketplace
 /plugin install <plugin-name>
 ```
 
 ### Direct from GitHub
 ```bash
-/plugin install github:foxflow/foxit-marketplace/plugins/<plugin-name>
+/plugin install github:Lego4005/foxit-marketplace/plugins/<plugin-name>
 ```
 
 ### Local Development
 ```bash
-git clone https://github.com/foxflow/foxit-marketplace
+git clone https://github.com/Lego4005/foxit-marketplace
 /plugin install ./foxit-marketplace/plugins/<plugin-name>
 ```
 
@@ -136,8 +137,8 @@ We welcome contributions! To add your plugin:
 
 ## Support
 
-- **Issues**: [GitHub Issues](https://github.com/foxflow/foxit-marketplace/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/foxflow/foxit-marketplace/discussions)
+- **Issues**: [GitHub Issues](https://github.com/Lego4005/foxit-marketplace/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/Lego4005/foxit-marketplace/discussions)
 - **Email**: plugins@foxflow.dev
 
 ## License

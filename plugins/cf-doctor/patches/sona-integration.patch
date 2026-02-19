@@ -1,0 +1,76 @@
+--- a/v3/@claude-flow/neural/src/sona-integration.ts
++++ b/v3/@claude-flow/neural/src/sona-integration.ts
+@@ -1,27 +1,55 @@
+-import { SonaEngine } from '@ruvector/sona';
++// Dynamic import with fallback - @ruvector/sona is optional
++let SonaEngineImpl: any = null;
+
+-export class SonaIntegration {
+-  private engine: SonaEngine;
++async function loadSonaEngine(): Promise<any> {
++  if (SonaEngineImpl !== null) return SonaEngineImpl;
++  try {
++    const mod = await import('@ruvector/sona');
++    SonaEngineImpl = mod.SonaEngine;
++    return SonaEngineImpl;
++  } catch {
++    // @ruvector/sona not installed - use in-memory mock
++    SonaEngineImpl = class MockSonaEngine {
++      private store = new Map<string, any>();
+
+-  constructor() {
+-    this.engine = new SonaEngine();
+-  }
++      async store(key: string, pattern: any): Promise<void> {
++        this.store.set(key, pattern);
++      }
+
+-  async storePattern(key: string, pattern: any): Promise<void> {
+-    await this.engine.store(key, pattern);
+-  }
++      async recall(key: string): Promise<any> {
++        return this.store.get(key) ?? null;
++      }
+
+-  async recallPattern(key: string): Promise<any> {
+-    return this.engine.recall(key);
++      async learn(_input: any, _feedback: number): Promise<void> {
++        // Mock: no-op learning without SONA neural backend
++      }
++    };
++    return SonaEngineImpl;
+   }
++}
+
+-  async learn(input: any, feedback: number): Promise<void> {
+-    await this.engine.learn(input, feedback);
++export class SonaIntegration {
++  private engine: any = null;
++  private initialized = false;
++
++  private async ensureInit(): Promise<void> {
++    if (this.initialized) return;
++    const Engine = await loadSonaEngine();
++    this.engine = new Engine();
++    this.initialized = true;
++  }
++
++  async storePattern(key: string, pattern: any): Promise<void> {
++    await this.ensureInit();
++    await this.engine.store(key, pattern);
++  }
++
++  async recallPattern(key: string): Promise<any> {
++    await this.ensureInit();
++    return this.engine.recall(key);
++  }
++
++  async learn(input: any, feedback: number): Promise<void> {
++    await this.ensureInit();
++    await this.engine.learn(input, feedback);
++  }
++
++  isUsingMock(): boolean {
++    return SonaEngineImpl?.name === 'MockSonaEngine';
+   }
+ }
