@@ -312,6 +312,66 @@ check_installation() {
 }
 
 # ---------------------------------------------------------------------------
+# Section 2b: CLI Dependency Validation
+# ---------------------------------------------------------------------------
+check_cli_deps() {
+    section_header "CLI Dependencies"
+
+    local cli_dir=""
+    cli_dir="$(find . node_modules -maxdepth 5 -path '*/@claude-flow/cli' -type d 2>/dev/null | head -1)" || true
+
+    if [[ -z "$cli_dir" ]]; then
+        log_yellow "Cannot locate @claude-flow/cli directory — skipping dep check"
+        json_set "cli_deps" "yellow" "CLI directory not found"
+        return
+    fi
+
+    local missing_deps=()
+
+    # Check semver (required by update/checker.js)
+    if ! node -e "require('semver')" &>/dev/null 2>&1; then
+        if ! node -e "require('${cli_dir}/node_modules/semver')" &>/dev/null 2>&1; then
+            missing_deps+=("semver")
+        fi
+    fi
+
+    # Check @types/node (required for build)
+    if [[ ! -d "${cli_dir}/node_modules/@types/node" ]] && [[ ! -d "node_modules/@types/node" ]]; then
+        missing_deps+=("@types/node")
+    fi
+
+    if [[ ${#missing_deps[@]} -eq 0 ]]; then
+        log_green "CLI dependencies OK"
+        json_set "cli_deps" "green" "All CLI dependencies present"
+    else
+        local dep_list="${missing_deps[*]}"
+        log_red "Missing CLI dependencies: ${dep_list}"
+        json_set "cli_deps" "red" "Missing: ${dep_list}"
+        if $FIX_MODE; then
+            if ! $JSON_MODE; then
+                printf "    ${DIM}Installing missing CLI dependencies...${RESET}\n"
+            fi
+            local install_cmd="cd ${cli_dir} && npm install ${dep_list} --legacy-peer-deps"
+            if eval "$install_cmd" &>/dev/null; then
+                log_green "CLI dependencies installed (${dep_list})"
+                json_set "cli_deps" "green" "Auto-installed: ${dep_list}"
+            else
+                # Try pnpm as fallback
+                if (cd "$cli_dir" && pnpm add ${dep_list}) &>/dev/null; then
+                    log_green "CLI dependencies installed via pnpm (${dep_list})"
+                    json_set "cli_deps" "green" "Auto-installed via pnpm: ${dep_list}"
+                else
+                    if ! $JSON_MODE; then
+                        printf "    ${RED}Failed to install: ${dep_list}${RESET}\n"
+                        printf "    ${DIM}Try: cd ${cli_dir} && pnpm add ${dep_list}${RESET}\n"
+                    fi
+                fi
+            fi
+        fi
+    fi
+}
+
+# ---------------------------------------------------------------------------
 # Section 3: @ruvector Package Detection
 # ---------------------------------------------------------------------------
 check_ruvector() {
@@ -452,7 +512,7 @@ check_database() {
             if ! $JSON_MODE; then
                 printf "    ${DIM}Attempting to install better-sqlite3...${RESET}\n"
             fi
-            if npm install better-sqlite3 &>/dev/null; then
+            if npm install better-sqlite3 --legacy-peer-deps &>/dev/null; then
                 if node -e "require('better-sqlite3')" &>/dev/null; then
                     DB_DRIVER="better-sqlite3"
                     log_green "Database: better-sqlite3 (auto-installed)"
@@ -467,7 +527,7 @@ check_database() {
             if ! $JSON_MODE; then
                 printf "    ${DIM}Attempting to install sql.js...${RESET}\n"
             fi
-            if npm install sql.js &>/dev/null; then
+            if npm install sql.js --legacy-peer-deps &>/dev/null; then
                 if node -e "require('sql.js')" &>/dev/null; then
                     DB_DRIVER="sql.js"
                     log_green "Database: sql.js (auto-installed)"
@@ -669,6 +729,7 @@ main() {
 
     check_prerequisites
     check_installation
+    check_cli_deps
     check_ruvector
     check_directories
     check_database

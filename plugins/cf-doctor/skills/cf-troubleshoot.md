@@ -99,4 +99,7 @@ ruvector (Rust WASM)                     claude-flow (TypeScript)
 | `ENOENT: .claude-flow/agents` | Missing directory structure | `mkdir -p .claude-flow/{agents,memory,sessions,learning}` |
 | `TypeError: Cannot read properties of null (reading 'store')` | SONA engine not initialized | Apply sona-integration.patch (adds lazy init) |
 | `SQLITE_CANTOPEN` | Database file locked or missing directory | Check .claude-flow/memory/ exists |
-| `npm ERR! better-sqlite3` | Native compilation failed | `npm install sql.js` as alternative |
+| `npm ERR! better-sqlite3` | Native compilation failed | `npm install sql.js --legacy-peer-deps` as alternative |
+| `Cannot find package 'semver'` | Missing CLI dependency (upstream bug) | `cd v3/@claude-flow/cli && pnpm add semver` |
+| `Cannot find module 'fs'` (in rate-limiter.ts) | Missing @types/node in CLI | `cd v3/@claude-flow/cli && pnpm add @types/node` |
+| `ERESOLVE` on npm install | pnpm workspace peer dep conflict | Use `--legacy-peer-deps` flag |
