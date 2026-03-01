@@ -7,9 +7,6 @@
     "email": "plugins@foxflow.dev"
   },
   "license": "MIT",
-  "claude-code": {
-    "minVersion": "2.0.0"
-  },
   "hooks": {
     "SessionStart": [
       {
